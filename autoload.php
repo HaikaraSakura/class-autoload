@@ -7,7 +7,6 @@ define('AUTOLOAD_BASE_DIRECTORIES', [
 	'App\\' => '/home/public_html/sample/test_project/lib_app/app/'
 ]);
 
-
 // オートローダを登録
 spl_autoload_register(function (string $class_fullname): bool {
     if (defined('AUTOLOAD_BASE_DIRECTORIES')) {
