@@ -9,12 +9,13 @@ define('AUTOLOAD_BASE_DIRECTORIES', [
 
 // オートローダを登録
 spl_autoload_register(function (string $classname): bool {
-    if (defined('AUTOLOAD_BASE_DIRECTORIES')) {
-        foreach (AUTOLOAD_BASE_DIRECTORIES as $namespace => $directory) {
+    foreach (AUTOLOAD_BASE_DIRECTORIES as $namespace => $directory) {
+        // クラスの完全修飾名が、$namespaceと前方一致するか
+        if (strpos($classname, $namespace) === 0) {
             $classname_after = ltrim($classname, $namespace);
             $filename = $directory . join('/', explode('\\', $classname_after)) . '.php';
 
-            if (file_exists($filename) && is_readable($filename)) {
+            if (is_file($filename) && is_readable($filename)) {
                 require_once $filename;
                 return true;
             }
