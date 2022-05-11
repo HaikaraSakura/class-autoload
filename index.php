@@ -4,4 +4,4 @@ declare(strict_types=1);
 
 require_once './autoload.php';
 
-new DummyClass();
+new \App\Dummies\DummyClass();
