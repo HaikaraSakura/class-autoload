@@ -11,7 +11,8 @@ define('AUTOLOAD_BASE_DIRECTORIES', [
 spl_autoload_register(function (string $classname): bool {
     foreach (AUTOLOAD_BASE_DIRECTORIES as $namespace => $directory) {
         // クラスの完全修飾名が、$namespaceと前方一致するか
-        if (strpos($classname, $namespace) === 0) {
+	// PHP8未満の場合はstrpos($classname, $namespace) === 0で検査すること
+	if (str_starts_with($classname, $namespace)) {
             // クラスの完全修飾名から名前空間を取り除いた文字列を取得
             $classname_after = ltrim($classname, $namespace);
 
