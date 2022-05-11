@@ -15,7 +15,7 @@ spl_autoload_register(function (string $classname): bool {
             // クラスの完全修飾名から名前空間を取り除いた文字列を取得
             $classname_after = ltrim($classname, $namespace);
 
-            // クラスファイルのパスを組み立てて読み込む
+            // ファイルのパスを組み立てて読み込む
             require_once $directory . join('/', explode('\\', $classname_after)) . '.php';
             
             return true;
